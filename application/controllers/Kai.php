@@ -16,15 +16,19 @@ class Kai extends REST_Controller
 
     public function index_get()
     {
-        $id = $this->get('id');
+        $id = $this->get('id_kereta');
         if ($id == '') {
             $kereta = $this->db->get('kereta_api')->result();
         } else {
-            $this->db->where('id', $id);
+            $this->db->where('id_kereta', $id);
             $kereta = $this->db->get('kereta_api')->result();
         }
 
         $this->response($kereta, 200);
+    }
+
+    public function asdsa()
+    {
     }
 }
 
