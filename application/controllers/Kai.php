@@ -26,9 +26,42 @@ class Kai extends REST_Controller
 
         $this->response($kereta, 200);
     }
-
-    public function asdsa()
+    // menambah data baru
+    // POST digunakan sama halnya CREATE di CRUD
+    public function index_post()
     {
+        $data = array(
+            // 'id_kereta' => $this->post('id'),
+            'nama_kereta_api' => $this->post('nama'),
+            'kelas_kereta' => $this->post('kelas')
+        );
+        $insert = $this->db->insert('kereta_api', $data);
+        if ($insert) {
+            $this->response($data, 200);
+            # code...
+        } else {
+            $this->response(array('status' => 'fail', 502));
+            # code...
+        }
+    }
+    // put digunakan sama halnya dengan UPDATE di CRUD
+    public function index_put()
+    {
+        $id = $this->put('id');
+        $data = array(
+            'id_kereta' => $this->post('id'),
+            'nama_kereta_api' => $this->post('nama'),
+            'kelas_kereta' => $this->post('kelas')
+        );
+        $this->db->where('id_kereta', $id);
+        $update = $this->db->update('kereta_api', $data);
+        if ($update) {
+            $this->response($data, 200);
+        } else {
+            $this->response(array('status' => 'fail', 502));
+            # code...
+
+        }
     }
 }
 
