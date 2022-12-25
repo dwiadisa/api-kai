@@ -49,9 +49,9 @@ class Kai extends REST_Controller
     {
         $id = $this->put('id');
         $data = array(
-            'id_kereta' => $this->post('id'),
-            'nama_kereta_api' => $this->post('nama'),
-            'kelas_kereta' => $this->post('kelas')
+            'id_kereta' => $this->put('id'),
+            'nama_kereta_api' => $this->put('nama'),
+            'kelas_kereta' => $this->put('kelas')
         );
         $this->db->where('id_kereta', $id);
         $update = $this->db->update('kereta_api', $data);
@@ -61,6 +61,19 @@ class Kai extends REST_Controller
             $this->response(array('status' => 'fail', 502));
             # code...
 
+        }
+    }
+    public function index_delete()
+    {
+        $id = $this->delete('id');
+        $this->db->where('id_kereta', $id);
+        $delete = $this->db->delete('kereta_api');
+        if ($delete) {
+            $this->response(array('status' => 'success'), 201);
+            # code...
+        } else {
+            $this->response(array('status' => 'fail'), 502);
+            # code...
         }
     }
 }
